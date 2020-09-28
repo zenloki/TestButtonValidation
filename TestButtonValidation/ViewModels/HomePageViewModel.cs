@@ -52,5 +52,13 @@ namespace TestButtonValidation.ViewModels
             }
         }
 
+
+        public void ValidateText()
+        {
+        // If there is an error show it on the view with this method.
+        
+        
+        }
+
     }
 }
