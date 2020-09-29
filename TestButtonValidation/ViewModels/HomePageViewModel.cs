@@ -92,14 +92,21 @@ namespace TestButtonValidation.ViewModels
         {
             if (ValidatedForm())
             {
-                MessageBox.Show("No Errors");
+                //No Errors
+              //TODO: Add logic
             }
             else
             {
-                MessageBox.Show("Has Errors");
-               var a = Error[0].ToString();
-                MessageBox.Show(a);
+                //Has Errors
+                //TODO: Add logic   
             }
+        }
+        public void ClearValidation()
+        {
+
+            Validation = false; // turn off validation
+            NotifyOfPropertyChange(null); //refresh the properties/view
+            Name = string.Empty;
         }
 
     }

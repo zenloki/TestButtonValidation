@@ -23,5 +23,6 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
+        <Button x:Name="ClearValidation" Content="Clear" Canvas.Left="214" Canvas.Top="326" Width="301" Height="29" />
     </Canvas>
 </UserControl>
