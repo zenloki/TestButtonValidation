@@ -55,7 +55,8 @@ namespace TestButtonValidation.ViewModels
 
         public void ValidateText()
         {
-        // If there is an error show it on the view with this method.
+            //I would like to hid the error on the view until it is validated with this method
+        
         
         
         }
