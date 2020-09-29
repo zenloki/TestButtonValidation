@@ -11,6 +11,7 @@ namespace TestButtonValidation.Validators
             RuleFor(x => x.Name)
                 .NotNull()
                 .WithMessage("Nothing Entered");
+          
 
         }
     }
