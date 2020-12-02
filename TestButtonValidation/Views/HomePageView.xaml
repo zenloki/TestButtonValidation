@@ -6,23 +6,62 @@
              xmlns:local="clr-namespace:TestButtonValidation.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="White" Offset="0"/>
+                        <GradientStop Color="#FF5F5F5F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="GotFocus">
+                    <BeginStoryboard >
+                        <Storyboard >
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[0].Offset" From="0" To="1" Duration="0:0:2"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="LostFocus" >
+                    <BeginStoryboard >
+                        <Storyboard >
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[0].Offset" From="1" To="0" Duration="0:0:2"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Canvas FocusManager.FocusedElement="{Binding ElementName=box}">
+        <TextBox Canvas.Left="214" Canvas.Top="119" Width="281" Style="{StaticResource TextBoxStyle}"></TextBox>
         <!-- Sets the focus to start with textbox-->
         <Button x:Name="ValidateText" Content="Validate" Canvas.Left="214" Canvas.Top="281" Width="301" Height="29" />
 
         <TextBox  Height="23" Canvas.Left="205" TextWrapping="Wrap"
-                  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                  Canvas.Top="187" Width="330" TabIndex="0" x:Name="box" >
-            <Validation.ErrorTemplate>
-                <ControlTemplate  >
-                    <StackPanel Orientation="Horizontal"   >
-                        <!-- Placeholder for the TextBox itself -->
-                        <AdornedElementPlaceholder x:Name="textBox" />
-                        <TextBlock Margin="10" Text="{Binding [0].ErrorContent}" Foreground="Red"  />
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
+                  Text="{Binding Name, UpdateSourceTrigger=Explicit, ValidatesOnDataErrors=True}" 
+                  Canvas.Top="187" Width="330" TabIndex="0" x:Name="box" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}">
+            <!--Style comes from ToolTipError Template-->
+
+
+
         </TextBox>
         <Button x:Name="ClearValidation" Content="Clear" Canvas.Left="214" Canvas.Top="326" Width="301" Height="29" />
+        <TextBox  Height="22" Canvas.Left="205" TextWrapping="Wrap"
+            Text="{Binding DoubleValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+            Canvas.Top="226" Width="330" TabIndex="0" x:Name="box_Copy" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}">
+            <!--Validation.ErrorTemplate Comes from resource "myerrorTemplate" 
+                Resources are set in app.xaml
+            -->
+
+
+        </TextBox>
+
+        <!--<TextBox  Height="22" Canvas.Left="205" TextWrapping="Wrap" 
+            Text="{Binding Blank, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+            Canvas.Top="147" Width="330" TabIndex="0" x:Name="box_Copy1"  Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}"/>-->
     </Canvas>
 </UserControl>

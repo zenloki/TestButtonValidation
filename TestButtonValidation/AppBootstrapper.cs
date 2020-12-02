@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
+using TestButtonValidation.Helpers;
 using TestButtonValidation.ViewModels;
 
 namespace TestButtonValidation
@@ -13,6 +15,10 @@ namespace TestButtonValidation
     {
         public AppBootstrapper()
         {
+            ConventionManager.AddElementConvention<PasswordBox>(
+      PasswordBoxHelper.BoundPasswordProperty,
+      "Password",
+      "PasswordChanged");
             Initialize();
         }
         protected override void OnStartup(object sender, StartupEventArgs e)

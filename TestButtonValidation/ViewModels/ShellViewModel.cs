@@ -13,7 +13,7 @@ namespace TestButtonValidation.ViewModels
         public ShellViewModel()
         {
            
-            ActivateItem(new HomePageViewModel());
+            ActivateItem(new ListViewModel());
         }
     }
 }

@@ -10,6 +10,23 @@ namespace TestButtonValidation.ViewModels
     public class HomePageViewModel : Screen, IDataErrorInfo
     {
         private bool _validation;
+        private string _blank;
+
+        private bool _mybool=true;
+
+        public bool Mybool
+        {
+            get { return _mybool; }
+            set { _mybool = value; }
+        }
+
+        public string Blank
+        {
+            get { return _blank; }
+            set { _blank = value;
+                NotifyOfPropertyChange(() => Blank);
+                }
+        }
 
         public bool Validation
         {
@@ -18,12 +35,23 @@ namespace TestButtonValidation.ViewModels
                 NotifyOfPropertyChange(() => Validation);
                 }
         }
+        private string _doubleValue;
+
+        public string DoubleValue
+        {
+            get{ return _doubleValue; }
+            set {
+                _doubleValue = value;
+                NotifyOfPropertyChange(() => DoubleValue);    
+            }
+        }
+
 
         private readonly UserValidation _userValidator;
         public HomePageViewModel()
         {
            _userValidator = new UserValidation();
-            Validation = false;
+            _validation = false;
         }
         private string _name;
 
@@ -76,6 +104,7 @@ namespace TestButtonValidation.ViewModels
             bool isValid = false;
             Validation = true; // turn on validation
             NotifyOfPropertyChange(null); //refresh the properties/view
+        
             if (Error.Length == 0)
             {
                 isValid = true; //  no validation errors
@@ -92,6 +121,7 @@ namespace TestButtonValidation.ViewModels
         {
             if (ValidatedForm())
             {
+                MessageBox.Show("Valid Data");
                 //No Errors
               //TODO: Add logic
             }
@@ -106,7 +136,7 @@ namespace TestButtonValidation.ViewModels
 
             Validation = false; // turn off validation
             NotifyOfPropertyChange(null); //refresh the properties/view
-            Name = string.Empty;
+            
         }
 
     }
