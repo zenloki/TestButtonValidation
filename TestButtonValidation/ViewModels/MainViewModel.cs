@@ -1,17 +1,18 @@
 ﻿using Caliburn.Micro;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestButtonValidation.Validators;
+using System.Windows;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace TestButtonValidation.ViewModels
 {
-  public  class MainViewModel : Screen
+    public  class MainViewModel : Screen
     {
         public MainViewModel()
         { _mainVal = new MainValidator(); }
+
         private readonly MainValidator _mainVal;
         private string _name;
 
@@ -49,6 +50,11 @@ namespace TestButtonValidation.ViewModels
                 }
                 return string.Empty;
             }
+        }
+
+        public void Testing_click()
+        {
+            ValidationResult results = _mainVal.Validate(this);
         }
     }
 }
